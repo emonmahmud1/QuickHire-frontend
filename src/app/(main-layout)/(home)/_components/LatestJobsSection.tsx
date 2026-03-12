@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { getAllJobs } from "@/services/api";
 import { Job } from "@/types";
 import SectionHeader from "@/components/shared/main/SectionHeader";
