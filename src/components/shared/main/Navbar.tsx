@@ -1,11 +1,31 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Menu, X, Compass } from "lucide-react";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userName, setUserName] = useState("");
+
+  useEffect(() => {
+    // Check if user is logged in
+    const token = localStorage.getItem("token");
+    const user = localStorage.getItem("user");
+    if (token && user) {
+      setIsLoggedIn(true);
+      const userData = JSON.parse(user);
+      setUserName(userData.name);
+    }
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    setIsLoggedIn(false);
+    window.location.href = "/";
+  };
 
   return (
     <nav className="bg-white border-b border-gray-100 sticky top-0 z-50">
@@ -38,18 +58,40 @@ const Navbar = () => {
 
           {/* Desktop Auth Buttons */}
           <div className="hidden md:flex items-center gap-4">
-            <Link
-              href="/login"
-              className="text-[#4640DE] font-semibold hover:underline"
-            >
-              Login
-            </Link>
-            <Link
-              href="/register"
-              className="bg-[#4640DE] text-white font-semibold px-6 py-2.5 rounded hover:bg-[#3730c0] transition-colors"
-            >
-              Sign Up
-            </Link>
+            {isLoggedIn ? (
+              <>
+                <span className="text-[#515B6F] text-sm">
+                  Hello, <span className="font-semibold text-[#25324B]">{userName}</span>
+                </span>
+                <Link
+                  href="/dashboard"
+                  className="text-[#4640DE] font-semibold hover:underline"
+                >
+                  Dashboard
+                </Link>
+                <button
+                  onClick={handleLogout}
+                  className="text-[#515B6F] font-semibold hover:text-[#4640DE] transition-colors"
+                >
+                  Logout
+                </button>
+              </>
+            ) : (
+              <>
+                <Link
+                  href="/login"
+                  className="text-[#4640DE] font-semibold hover:underline"
+                >
+                  Login
+                </Link>
+                <Link
+                  href="/register"
+                  className="bg-[#4640DE] text-white font-semibold px-6 py-2.5 rounded hover:bg-[#3730c0] transition-colors"
+                >
+                  Sign Up
+                </Link>
+              </>
+            )}
           </div>
 
           {/* Mobile menu toggle */}
@@ -80,20 +122,43 @@ const Navbar = () => {
               Browse Companies
             </Link>
             <hr className="border-gray-100" />
-            <Link
-              href="/login"
-              className="text-[#4640DE] font-semibold text-sm"
-              onClick={() => setMenuOpen(false)}
-            >
-              Login
-            </Link>
-            <Link
-              href="/register"
-              className="bg-[#4640DE] text-white font-semibold text-sm px-5 py-2 rounded text-center"
-              onClick={() => setMenuOpen(false)}
-            >
-              Sign Up
-            </Link>
+            {isLoggedIn ? (
+              <>
+                <Link
+                  href="/dashboard"
+                  className="text-[#4640DE] font-semibold text-sm"
+                  onClick={() => setMenuOpen(false)}
+                >
+                  Dashboard
+                </Link>
+                <button
+                  onClick={() => {
+                    handleLogout();
+                    setMenuOpen(false);
+                  }}
+                  className="text-[#515B6F] font-semibold text-sm text-left"
+                >
+                  Logout
+                </button>
+              </>
+            ) : (
+              <>
+                <Link
+                  href="/login"
+                  className="text-[#4640DE] font-semibold text-sm"
+                  onClick={() => setMenuOpen(false)}
+                >
+                  Login
+                </Link>
+                <Link
+                  href="/register"
+                  className="bg-[#4640DE] text-white font-semibold text-sm px-5 py-2 rounded text-center"
+                  onClick={() => setMenuOpen(false)}
+                >
+                  Sign Up
+                </Link>
+              </>
+            )}
           </div>
         )}
       </div>

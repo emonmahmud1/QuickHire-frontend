@@ -3,7 +3,7 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { createJob } from "@/services/api";
+import { createJobAuth } from "@/services/api";
 import { Job, JobFormData } from "@/types";
 import { useState } from "react";
 import { Loader2, CheckCircle } from "lucide-react";
@@ -30,11 +30,11 @@ const categories = [
 ];
 
 interface AddJobFormProps {
-  adminKey: string;
+  token: string | null;
   onJobAdded: (job: Job) => void;
 }
 
-const AddJobForm = ({ adminKey, onJobAdded }: AddJobFormProps) => {
+const AddJobForm = ({ token, onJobAdded }: AddJobFormProps) => {
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [errorMsg, setErrorMsg] = useState("");
 
@@ -49,7 +49,7 @@ const AddJobForm = ({ adminKey, onJobAdded }: AddJobFormProps) => {
     setStatus("loading");
     setErrorMsg("");
     try {
-      const res = await createJob(values as JobFormData, adminKey);
+      const res = await createJobAuth(values as JobFormData, token ?? "");
       if (res.success && res.data) {
         setStatus("success");
         onJobAdded(res.data);

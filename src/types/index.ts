@@ -18,6 +18,31 @@ export interface ApplicationFormData {
   cover_note?: string;
 }
 
+// User type
+export interface User {
+  id: string;
+  name: string;
+  email: string;
+  role: "user" | "admin";
+}
+
+// Auth types
+export interface RegisterData {
+  name: string;
+  email: string;
+  password: string;
+}
+
+export interface LoginData {
+  email: string;
+  password: string;
+}
+
+export interface AuthResponse {
+  user: User;
+  token: string;
+}
+
 // Form data for creating a job (admin)
 export interface JobFormData {
   title: string;

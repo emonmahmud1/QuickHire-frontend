@@ -28,11 +28,11 @@ const getColor = (str: string) =>
 
 interface ManageJobsProps {
   jobs: Job[];
-  adminKey: string;
+  token: string | null;
   onJobDeleted: (id: string) => void;
 }
 
-const ManageJobs = ({ jobs, adminKey, onJobDeleted }: ManageJobsProps) => {
+const ManageJobs = ({ jobs, token, onJobDeleted }: ManageJobsProps) => {
   const [deletingId, setDeletingId] = useState<string | null>(null);
   const [errorId, setErrorId] = useState<string | null>(null);
 
@@ -41,7 +41,7 @@ const ManageJobs = ({ jobs, adminKey, onJobDeleted }: ManageJobsProps) => {
     setDeletingId(id);
     setErrorId(null);
     try {
-      const res = await deleteJob(id, adminKey);
+      const res = await deleteJob(id, token ?? "");
       if (res.success) {
         onJobDeleted(id);
       } else {
