@@ -33,7 +33,7 @@ const LoginPage = () => {
     try {
       const response = await loginUser(formData);
 
-      if (response.success) {
+      if (response.success && response.data) {
         toast.success("Login successful! Redirecting...");
         
         // Save token and user to localStorage

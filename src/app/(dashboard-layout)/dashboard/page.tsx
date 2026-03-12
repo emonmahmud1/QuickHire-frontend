@@ -61,11 +61,11 @@ const DashboardPage = () => {
       ]);
 
       if (jobsRes.success) {
-        setMyJobs(jobsRes.data);
+        setMyJobs(jobsRes.data ?? []);
       }
 
       if (applicationsRes.success) {
-        setApplications(applicationsRes.data);
+        setApplications(applicationsRes.data ?? []);
       }
     } catch (error: any) {
       toast.error("Failed to fetch data");
