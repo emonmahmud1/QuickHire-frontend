@@ -24,13 +24,13 @@ const Navbar = () => {
           <div className="hidden md:flex items-center gap-8">
             <Link
               href="/jobs"
-              className="text-[#515B6F] hover:text-[#4640DE] font-medium text-sm transition-colors"
+              className="text-[#515B6F] hover:text-[#4640DE] font-medium transition-colors"
             >
               Find Jobs
             </Link>
             <Link
               href="/"
-              className="text-[#515B6F] hover:text-[#4640DE] font-medium text-sm transition-colors"
+              className="text-[#515B6F] hover:text-[#4640DE] font-medium transition-colors"
             >
               Browse Companies
             </Link>
@@ -39,14 +39,14 @@ const Navbar = () => {
           {/* Desktop Auth Buttons */}
           <div className="hidden md:flex items-center gap-4">
             <Link
-              href="/"
-              className="text-[#4640DE] font-semibold text-sm hover:underline"
+              href="/login"
+              className="text-[#4640DE] font-semibold hover:underline"
             >
               Login
             </Link>
             <Link
-              href="/"
-              className="bg-[#4640DE] text-white font-semibold text-sm px-5 py-2 rounded hover:bg-[#3730c0] transition-colors"
+              href="/register"
+              className="bg-[#4640DE] text-white font-semibold px-6 py-2.5 rounded hover:bg-[#3730c0] transition-colors"
             >
               Sign Up
             </Link>
@@ -81,14 +81,14 @@ const Navbar = () => {
             </Link>
             <hr className="border-gray-100" />
             <Link
-              href="/"
+              href="/login"
               className="text-[#4640DE] font-semibold text-sm"
               onClick={() => setMenuOpen(false)}
             >
               Login
             </Link>
             <Link
-              href="/"
+              href="/register"
               className="bg-[#4640DE] text-white font-semibold text-sm px-5 py-2 rounded text-center"
               onClick={() => setMenuOpen(false)}
             >

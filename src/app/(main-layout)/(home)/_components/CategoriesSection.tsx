@@ -1,4 +1,3 @@
-import Link from "next/link";
 import {
   Palette,
   TrendingUp,
@@ -9,6 +8,7 @@ import {
   Briefcase,
   Users,
 } from "lucide-react";
+import SectionHeader from "@/components/shared/main/SectionHeader";
 
 const categories = [
   { name: "Design", count: 235, icon: Palette, highlighted: false },
@@ -25,19 +25,7 @@ const CategoriesSection = () => {
   return (
     <section className="py-16 bg-[#F8F8FD]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <div className="flex items-center justify-between mb-10">
-          <h2 className="text-3xl font-bold text-[#25324B]">
-            Explore by{" "}
-            <span className="text-[#26A4FF]">category</span>
-          </h2>
-          <Link
-            href="/jobs"
-            className="text-[#4640DE] font-semibold text-sm flex items-center gap-1 hover:underline"
-          >
-            Show all jobs →
-          </Link>
-        </div>
+        <SectionHeader title="Explore by" highlightedText="category" />
 
         {/* Grid */}
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
